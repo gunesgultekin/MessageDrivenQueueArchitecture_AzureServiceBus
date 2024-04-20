@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.QueueOrder/appsettings.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -361,3 +362,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/QueueOrder/appsettings.json
+/QueueOrder/Properties/launchSettings.json
+/QueuePayment/appsettings.json
+/QueuePayment/Properties/launchSettings.json
