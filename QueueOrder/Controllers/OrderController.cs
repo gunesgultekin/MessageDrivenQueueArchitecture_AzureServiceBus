@@ -32,10 +32,10 @@ namespace QueueOrder.Controllers
             };
 
             client = new ServiceBusClient(
-                "Endpoint=sb://ecommercesaga.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=oQQqqj+2uXtSb8qaUFirOQ5AJhCme6iGG+ASbEa8hPU=",
+                "Endpoint=AZURE_SERVICE_BUS_ENDPOINT",
                 clientOptions);
 
-            OrderSender = client.CreateSender("Orders");
+            OrderSender = client.CreateSender("ordersQueue");
 
             // SEND ORDER TO ORDER QUEUE
 
@@ -51,6 +51,5 @@ namespace QueueOrder.Controllers
             await OrderSender.SendMessagesAsync(OrderBatch);
 
         }
-
     }
 }

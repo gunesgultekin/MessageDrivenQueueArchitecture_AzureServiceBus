@@ -47,8 +47,8 @@ namespace QueuePayment.Controllers
                 TransportType = ServiceBusTransportType.AmqpWebSockets
             };
 
-            client = new ServiceBusClient("Endpoint=sb://ecommercesaga.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=oQQqqj+2uXtSb8qaUFirOQ5AJhCme6iGG+ASbEa8hPU=", clientOptions);
-            PaymentSender = client.CreateSender("Payments");
+            client = new ServiceBusClient("Endpoint=AZURE_SERVICE_BUS_ENDPOINT",clientOptions);
+            PaymentSender = client.CreateSender("paymentsQueue");
 
             using ServiceBusMessageBatch PaymentBatch = await PaymentSender.CreateMessageBatchAsync();
 
@@ -83,16 +83,14 @@ namespace QueuePayment.Controllers
             {
                 TransportType = ServiceBusTransportType.AmqpWebSockets,
             };
-            client = new ServiceBusClient("Endpoint=sb://ecommercesaga.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=oQQqqj+2uXtSb8qaUFirOQ5AJhCme6iGG+ASbEa8hPU=", clientOptions);
+            client = new ServiceBusClient("Endpoint=AZURE_SERVICE_BUS_ENDPOINT", clientOptions);
 
-            processor = client.CreateProcessor("Orders", new ServiceBusProcessorOptions
+            processor = client.CreateProcessor("ordersQueue", new ServiceBusProcessorOptions
             {
                 MaxConcurrentCalls = 1,
                 ReceiveMode = ServiceBusReceiveMode.ReceiveAndDelete
 
-            }
-                
-                
+            }           
             );
 
             processor.ProcessMessageAsync += MessageHandler;
